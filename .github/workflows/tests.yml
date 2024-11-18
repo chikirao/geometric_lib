@@ -47,9 +47,7 @@ jobs:
     
     - name: Set PYTHONPATH
       run: |
-        echo "Setting PYTHONPATH..."
-        export PYTHONPATH="${PYTHONPATH}:$(pwd)"
-        echo "PYTHONPATH set to $PYTHONPATH"
+        echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
       
 
     - name: Run unit tests
