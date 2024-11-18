@@ -1,0 +1,52 @@
+name: Geometric Library Tests
+
+on:
+  push:
+    branches:
+      - main
+      - release
+      - feat/tests
+      - develop
+      - feature
+  pull_request:
+    branches:
+      - main
+      - release
+      - develop
+      - feat/tests
+      - feature
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      STUDENT_NAME: Конанчук Иван Алексеевич
+      GROUP: M3114
+
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v3
+
+    - name: Output developer details
+      run: |
+        echo "Developer Information:"
+        echo "Name: $STUDENT_NAME"
+        echo "Group: $GROUP"
+        echo "GitHub Username: ${{ github.actor }}"
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.13
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run unit tests
+      run: pytest
+
+    - name: Check code style with flake8
+      run: flake8 .
