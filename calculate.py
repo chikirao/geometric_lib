@@ -1,13 +1,11 @@
 import circle
 import square
 
-
 figs = ['circle', 'square']
 funcs = ['perimeter', 'area']
-sizes = {}
 
 def calc(fig, func, size):
-	'''
+    '''
     Выполняет расчет для выбранной фигуры и функции.
     
     Аргументы:
@@ -15,29 +13,31 @@ def calc(fig, func, size):
     func -- строка, обозначающая функцию ('perimeter' или 'area')
     size -- список с размерами, необходимыми для расчета
     
-    Возвращает результат расчета и выводит его на экран.
+    Возвращает результат расчета.
     '''
-	assert fig in figs
-	assert func in funcs
+    if fig not in figs:
+        raise ValueError(f"Unknown figure: {fig}. Valid options are {figs}.")
+    if func not in funcs:
+        raise ValueError(f"Unknown function: {func}. Valid options are {funcs}.")
 
-	result = eval(f'{fig}.{func}(*{size})')
-	print(f'{func} of {fig} is {result}')
+    if fig == 'circle':
+        if func == 'area':
+            return circle.area(*size)
+        elif func == 'perimeter':
+            return circle.perimeter(*size)
+    elif fig == 'square':
+        if func == 'area':
+            return square.area(*size)
+        elif func == 'perimeter':
+            return square.perimeter(*size)
 
 if __name__ == "__main__":
-	func = ''
-	fig = ''
-	size = list()
-    
-	while fig not in figs:
-		fig = input(f"Enter figure name, avaliable are {figs}:\n")
-	
-	while func not in funcs:
-		func = input(f"Enter function name, avaliable are {funcs}:\n")
-	
-	while len(size) != sizes.get(f"{func}-{fig}", 1):
-		size = list(map(int, input("Input figure sizes separated by space, 1 for circle and square\n").split(' ')))
-	
-	calc(fig, func, size)
+    fig = input(f"Enter figure name (available: {figs}):\n").strip()
+    func = input(f"Enter function name (available: {funcs}):\n").strip()
+    size = list(map(float, input("Enter size(s), separated by spaces:\n").split()))
 
-
-
+    try:
+        result = calc(fig, func, size)
+        print(f"The {func} of {fig} is {result}")
+    except ValueError as e:
+        print(e)
