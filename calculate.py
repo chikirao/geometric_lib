@@ -16,6 +16,10 @@ def calc(fig, func, size):
 
     Возвращает результат расчета.
     """
+    
+    assert fig in figs
+    assert func in funcs
+
     if fig not in figs:
         raise ValueError(
             f"Unknown figure: {fig}. Valid options are {figs}."
