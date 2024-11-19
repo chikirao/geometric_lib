@@ -5,16 +5,11 @@ on:
     branches:
       - main
       - release
-      - feat/tests
-      - develop
-      - feature
   pull_request:
     branches:
       - main
       - release
       - develop
-      - feat/tests
-      - feature
 
 jobs:
   test:
