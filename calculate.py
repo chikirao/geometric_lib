@@ -24,17 +24,12 @@ def calc(fig, func, size):
         raise ValueError(
             f"Unknown function: {func}. Valid options are {funcs}."
         )
-
-    if fig == "circle":
-        if func == "area":
-            return circle.area(*size)
-        if func == "perimeter":
-            return circle.perimeter(*size)
-    if fig == "square":
-        if func == "area":
-            return square.area(*size)
-        if func == "perimeter":
-            return square.perimeter(*size)
+    try:
+        # Используем eval для вызова функции
+        result = eval(f"{fig}.{func}(*{size})")
+        return result
+    except Exception as e:
+        raise ValueError(f"Error during calculation: {e}")
 
 
 if __name__ == "__main__":
