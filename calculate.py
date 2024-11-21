@@ -1,5 +1,7 @@
-import circle
-import square
+import circle  # noqa: F401
+import square  # noqa: F401
+# Теперть flake игнорирует импорты,
+# так как он не понимал, что они для eval
 
 figs = ["circle", "square"]
 funcs = ["perimeter", "area"]
@@ -16,7 +18,6 @@ def calc(fig, func, size):
 
     Возвращает результат расчета.
     """
-    
     assert fig in figs
     assert func in funcs
 
